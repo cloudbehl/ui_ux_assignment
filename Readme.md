@@ -1,5 +1,7 @@
 Project Details:
 
+index.html and system.html are the two html files that have all the functionality, in order for them to run properly please clone this repository and run the html files locally.
+
 There are Two HTML Pages:
 1: DashBoard.
 2: Details Of Host.
