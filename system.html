@@ -1,0 +1,236 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+        <title > Connected Systems</title > 
+        <!-- Bootstrap core CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet" >
+    <script src="js/Chart.js"> </script>
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="js/jquery.AshAlom.gaugeMeter-2.0.0.min.js"></script>
+    
+    <script>
+        function getUrlVars() {
+            var vars = {};
+            var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+                vars[key] = value;
+            });
+            return vars;
+        }
+        function getRandomizer(bottom, top)
+        {
+                return ~~(Math.floor(Math.random() * (1 + top - bottom))) + bottom;
+        }
+    </script>
+    <style>
+        body {
+            background-color: lightgray;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="index.html">Connected Systems</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="index.html">Dashboard</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <br><br>
+    <div class="text-center">
+        <div class=" panel panel-default">
+            <h2 style="color:slategrey; font-family:Kartika">
+                <script>
+                    document.writeln(getUrlVars()["system"]);
+                </script>
+
+            </h2>
+        </div>
+    </div>
+    <div class=" col-md-12 col-sm-12" style=" color:darkslategray">
+        <div class=" col-md-3 col-sm3">
+            <div class=" panel panel-default">
+                <div class="text-center" style="margin-top:10px ">
+                    <h4>Web Server</h4>
+                    <p id="demo"></p>
+                    <img title="Server Up" src="up.png" alt="up"> <h5 class="text-success">Up | 356ms.</h5>
+                </div>
+            </div>
+        </div>
+        <div class=" col-md-3 col-sm3">
+            <div class="panel panel-default">
+                <div class="text-center">
+                    <h4>DataBase</h4>
+                    <img title="Database Down" src="down.png" height="27" width="27" alt=""> <h5 class="text-danger">Down | 356ms.</h5>
+                </div>
+            </div>
+        </div>
+        <div class=" col-md-3 col-sm3">
+            <div class="panel panel-default text-center">
+                <h4>Logged In Users</h4>
+                <h4><span style=" color:green" class="glyphicon glyphicon-user "></span></h4><h4 style="color:green" class="random"></h4>
+            </div>
+        </div>
+        <div class=" col-md-3 col-sm3">
+            <div class="panel panel-default">
+                <div class="text-center">
+                    <h4>I/O Wait Time</h4>
+                    <h4><span title="10.32 m/s" style="color:purple" class="glyphicon glyphicon-time "></span></h4><h4 style="color:purple">10.32 m/s</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="panel panel-default panel-primary">
+                <div class="panel-heading"><h4>Overall System Health</h4></div>
+                <div style="width:100% ">
+                    <div>
+                        <canvas id="canvas" height="50" width="300"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+                var randomScalingFactor = function () { return Math.round(Math.random() * 100) };
+                var lineChartData = {
+                    labels: ["10 am", "11 am", "12 pm", "1 pm", "2 pm", "3 pm", "4 pm", "5 pm", "6 pm"],
+                    datasets: [
+                        {
+                            label: "My First dataset",
+                            fillColor: "rgba(0, 176, 226, 0.2)",
+                            strokeColor: "rgba(0, 176, 226, 0.8)",
+                            pointColor: "rgba(220,220,220,1)",
+                            pointStrokeColor: "#fff",
+                            pointHighlightStroke: "rgba(220,220,220,1)",
+                            data: [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor()]
+                        },
+                    ]
+
+                }
+
+                window.onload = function () {
+                    var ctx = document.getElementById("canvas").getContext("2d");
+                    window.myLine = new Chart(ctx).Line(lineChartData, {
+                        responsive: true
+                    });
+                }
+    </script>
+    <div class="col-md-12 col-sm-12 center-block text-center">
+        <div class="col-md-3 col-sm-3">
+            <div class="panel panel-default">
+                <div class="panel-heading"> <h4 class="text-center">CPU Usage</h4></div>
+                <div style="background-color:lightblue;" class="panel-body">
+                    <div title="2GHz / 2.67GHz" class="GaugeMeter pad" id="PreviewGaugeMeter_2" data-percent="81" data-size="250" data-theme="White" data-back="RGBa(0,0,0,.1)" data-animate_gauge_colors="1" data-animate_text_colors="1" data-width="15" data-label="%" data-style="Arch" data-label_color="#FFF"></div>
+                    <div class="panel panel-default">
+                        <h4 class="text-success text-center" style="color:gray">2Ghz / 2.67Ghz</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3">
+            <div class="panel panel-default">
+                <div class="panel-heading"> <h4 class="text-center">RAM Usage</h4></div>
+                <div style="background-color:mediumpurple" class="panel-body">
+                    <div title="3.8GB / 6GB" class="GaugeMeter pad" id="PreviewGaugeMeter_2" data-percent="63" data-size="250" data-theme="White" data-back="RGBa(0,0,0,.1)" data-animate_gauge_colors="1" data-animate_text_colors="1" data-width="15" data-label="%" data-style="Arch" data-label_color="#FFF"></div>
+                    <div class="panel panel-default">
+                        <h4 class="text-success text-center" style="color:gray">3.8GB / 6GB</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3 ">
+            <div class="panel panel-default">
+                <div class="panel-heading"> <h4 class="text-center">Disk Usage</h4></div>
+                <div style="background-color:skyblue" class="panel-body">
+                    <div title="1.3TB / 2TB" class="GaugeMeter pad" id="PreviewGaugeMeter_2" data-percent="77" data-size="250" data-theme="White" data-back="RGBa(0,0,0,.1)" data-animate_gauge_colors="1" data-animate_text_colors="1" data-width="15" data-label="%" data-style="Arch" data-label_color="#FFF"></div>
+                    <div class="panel panel-default">
+                        <h4 class="text-success text-center" style="color:gray">1.3TB / 2TB</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3">
+            <div class="panel panel-default">
+                <div class="panel-heading"> <h4 class="text-center">Network Health</h4></div>
+                <div style="background-color:lightgreen" class="panel-body">
+                    <div title="2.34 mbps / 4.0 mbps" class="GaugeMeter pad" id="PreviewGaugeMeter_2" data-percent="52" data-size="250" data-theme="White" data-back="RGBa(0,0,0,.1)" data-animate_gauge_colors="1" data-animate_text_colors="1" data-width="15" data-label="%" data-style="Arch" data-label_color="#FFF"></div>
+                    <div class="panel panel-default">
+                        <h4 class="text-success text-center" style="color:gray">2.34 mbps / 4.0 mbps</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>$(".GaugeMeter").gaugeMeter();</script>
+        <div class="col-md-6 col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading"><h4>CPU Usage</h4></div>
+                <div class="panel-body">
+
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-info" style="width:80%">Core 1 (1.2GHz/1.5Ghz)</div>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-success" style="width: 40%">Core 2(0.5GHz/1.5GHz)</div>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-warning" style="width: 80%">Core 3 (1.2GHz/1.5GHz)</div>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-danger" style="width: 50%">Core 4 (0.75GHz/1.5GHz)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading"><h4>Disk Usage</h4></div>
+                <div class="panel-body">
+                    <br />
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-info" style="width: 60%">/var Usage</div>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-success" style="width: 40%">/boot Usage</div>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-warning" style="width: 80%">Swap Usage</div>
+                    </div>
+                    <br />
+                </div>
+            </div>
+        </div>
+        <br />
+    </div>
+    <div class="col-md-12 col-sm-12 text-center">
+        <h5>© 2015 - Connected Systems</h5>
+         </div>
+            <!-- Bootstrap core JavaScript
+            ================================================== -->
+            <!-- Placed at the end of the document so the pages load faster -->
+    <script>
+    var x = document.getElementsByClassName("random");
+    var i;
+    var a;
+    for (i = 0; i < x.length + 1; i++) {
+        x[i].innerHTML = getRandomizer(1000, 3000) + " Users | " + getRandomizer(50, 150) + " Admin";
+    }
+    </script>
+
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+            <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+            <script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>
