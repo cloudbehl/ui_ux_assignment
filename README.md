@@ -30,3 +30,7 @@ Details Of Host:
 4. The Next Section is divided into 4 and all sections have a Gauge Chart showing detailed information about the usage of every system.
 
 5. The Last Section has two parts(CPU usage/Disk Usage) is having the proccessing Bars which shows how much memory is being used by Each Core in CPU usage and also memory used by each attribute of Disk Usage(/var Usage,/boot Usage,Swap Usage).
+
+Tested with:
+Firefox 41.0.1
+Chrome 46.0.2490.80
