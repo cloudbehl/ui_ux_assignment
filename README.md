@@ -1,5 +1,4 @@
 Project Details:
-=======================
 
 index.html and system.html are the two html files that have all the functionality, in order for them to run properly please clone this repository and run the html files locally.
 
